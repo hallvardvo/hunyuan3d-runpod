@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "basic_prompt",
+      "input": {
+        "prompt": "a high quality 3d model of a chair"
+      },
+      "timeout": 900000
+    }
+  ],
+  "config": {
+    "gpuTypeId": "NVIDIA GeForce RTX 4090",
+    "gpuCount": 1,
+    "allowedCudaVersions": [
+      "12.1",
+      "12.0"
+    ]
+  }
+}

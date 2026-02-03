@@ -1,0 +1,12 @@
+{
+  "title": "Hunyuan3D RunPod",
+  "description": "RunPod Serverless worker for Hunyuan3D 2.1 using ComfyUI.",
+  "type": "serverless",
+  "category": "image",
+  "iconUrl": "https://example.com/icon.png",
+  "config": {
+    "runsOn": "GPU",
+    "containerDiskInGb": 100,
+    "env": []
+  }
+}
