@@ -1,6 +1,6 @@
 {
-  "title": "Hunyuan3D RunPod",
-  "description": "RunPod Serverless worker for Hunyuan3D 2.1 using ComfyUI.",
+  "title": "Hunyuan3D 2.1 RunPod",
+  "description": "RunPod Serverless worker for Hunyuan3D 2.1 3D generation using ComfyUI.",
   "type": "serverless",
   "category": "image",
   "iconUrl": "https://example.com/icon.png",
