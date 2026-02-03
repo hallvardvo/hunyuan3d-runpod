@@ -1,5 +1,7 @@
 # Hunyuan3D 2.1 on RunPod Serverless
 
+[![Runpod](https://api.runpod.io/badge/hallvardvo/hunyuan3d-runpod)](https://console.runpod.io/hub/hallvardvo/hunyuan3d-runpod)
+
 This setup runs the Hunyuan3D 2.1 model on RunPod serverless infrastructure.
 
 ## Build and Push (on Mac M1)
