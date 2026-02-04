@@ -1,53 +1,9 @@
 {
-  "1": {
+  "0": {
     "inputs": {
-      "ckpt_name": "sd_xl_base_1.0.safetensors"
+      "image": "input_image.png"
     },
-    "class_type": "CheckpointLoaderSimple"
-  },
-  "2": {
-    "inputs": {
-      "text": "a high quality 3d model of a character, white background",
-      "clip": ["1", 1]
-    },
-    "class_type": "CLIPTextEncode"
-  },
-  "3": {
-    "inputs": {
-      "samples": ["4", 0],
-      "vae": ["1", 2]
-    },
-    "class_type": "VAEDecode"
-  },
-  "4": {
-    "inputs": {
-      "seed": 42,
-      "steps": 30,
-      "cfg": 7.5,
-      "sampler_name": "dpmpp_2m",
-      "scheduler": "karras",
-      "denoise": 1,
-      "model": ["1", 0],
-      "positive": ["2", 0],
-      "negative": ["5", 0],
-      "latent_image": ["6", 0]
-    },
-    "class_type": "KSampler"
-  },
-  "5": {
-    "inputs": {
-      "text": "low quality, blurry, dark, messy background",
-      "clip": ["1", 1]
-    },
-    "class_type": "CLIPTextEncode"
-  },
-  "6": {
-    "inputs": {
-      "width": 1024,
-      "height": 1024,
-      "batch_size": 1
-    },
-    "class_type": "EmptyLatentImage"
+    "class_type": "LoadImage"
   },
   "10": {
     "inputs": {
@@ -63,7 +19,7 @@
   },
   "12": {
     "inputs": {
-      "image": ["3", 0],
+      "image": ["0", 0],
       "model": ["10", 0],
       "steps": 50,
       "cfg": 5.0
