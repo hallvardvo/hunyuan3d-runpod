@@ -30,10 +30,11 @@ RUN pip install --no-cache-dir --force-reinstall "numpy<2.0" "opencv-python-head
 # Install ComfyUI and custom node requirements
 WORKDIR /app/ComfyUI
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir opencv-python==4.10.0.82 sageattention triton trimesh pygltflib rembg[gpu] xatlas
+    pip install --no-cache-dir --force-reinstall opencv-python==4.9.0.80 sageattention triton trimesh pygltflib rembg[gpu] xatlas
 
 # Install Hunyuan3D wrapper requirements
-RUN pip install --no-cache-dir -r ./custom_nodes/ComfyUI-Hunyuan3DWrapper/requirements.txt
+RUN pip install --no-cache-dir -r ./custom_nodes/ComfyUI-Hunyuan3DWrapper/requirements.txt && \
+    pip install --no-cache-dir --force-reinstall "numpy<2.0"
 
 # Create model directories (models will be downloaded at runtime)
 RUN mkdir -p /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-dit-v2 && \
