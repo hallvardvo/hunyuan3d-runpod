@@ -17,12 +17,14 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
     git clone https://github.com/ltdrdata/ComfyUI-Manager.git ComfyUI/custom_nodes/ComfyUI-Manager && \
     git clone https://github.com/kijai/ComfyUI-Hunyuan3DWrapper.git ComfyUI/custom_nodes/ComfyUI-Hunyuan3DWrapper && \
     git clone https://github.com/cubiq/ComfyUI_essentials.git ComfyUI/custom_nodes/ComfyUI_essentials && \
-    git clone https://github.com/WASasquatch/was-node-suite-comfyui.git ComfyUI/custom_nodes/was-node-suite-comfyui && \
     git clone https://github.com/kijai/ComfyUI-KJNodes.git ComfyUI/custom_nodes/ComfyUI-KJNodes && \
     git clone https://github.com/rgthree/rgthree-comfy.git ComfyUI/custom_nodes/rgthree-comfy
 
 # Install PyTorch with CUDA support
 RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Pin NumPy to v1.x for compatibility
+RUN pip install --no-cache-dir "numpy<2"
 
 # Install ComfyUI and custom node requirements
 WORKDIR /app/ComfyUI
