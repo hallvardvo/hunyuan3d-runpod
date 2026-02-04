@@ -23,8 +23,9 @@ RUN git clone https://github.com/comfyanonymous/ComfyUI.git && \
 # Install PyTorch with CUDA support
 RUN pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
-# Pin NumPy to v1.x for compatibility
-RUN pip install --no-cache-dir "numpy<2"
+# FIX: Force NumPy 1.x and compatible OpenCV BEFORE other packages
+# NumPy 2.x breaks the entire Hunyuan3D ecosystem
+RUN pip install --no-cache-dir --force-reinstall "numpy<2.0" "opencv-python-headless<4.11"
 
 # Install ComfyUI and custom node requirements
 WORKDIR /app/ComfyUI
