@@ -20,6 +20,44 @@ INPUT_DIR = f"{COMFYUI_PATH}/input"
 comfyui_process = None
 
 
+def download_models():
+    """Download models at runtime if not already present"""
+    models = [
+        {
+            "url": "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-dit-v2-0/model.fp16.safetensors",
+            "path": f"{COMFYUI_PATH}/models/diffusion_models/Hunyuan3D-2/hunyuan3d-dit-v2/model.fp16.safetensors"
+        },
+        {
+            "url": "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-dit-v2-0/config.yaml",
+            "path": f"{COMFYUI_PATH}/models/diffusion_models/Hunyuan3D-2/hunyuan3d-dit-v2/config.yaml"
+        },
+        {
+            "url": "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-vae-v2-0/model.fp16.safetensors",
+            "path": f"{COMFYUI_PATH}/models/diffusion_models/Hunyuan3D-2/hunyuan3d-vae-v2/model.fp16.safetensors"
+        },
+        {
+            "url": "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-vae-v2-0/config.yaml",
+            "path": f"{COMFYUI_PATH}/models/diffusion_models/Hunyuan3D-2/hunyuan3d-vae-v2/config.yaml"
+        },
+        {
+            "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors",
+            "path": f"{COMFYUI_PATH}/models/checkpoints/sd_xl_base_1.0.safetensors"
+        }
+    ]
+    
+    print("📦 Checking and downloading models...")
+    for model in models:
+        if os.path.exists(model["path"]):
+            print(f"✓ Model already exists: {os.path.basename(model['path'])}")
+        else:
+            print(f"⬇️  Downloading: {os.path.basename(model['path'])}")
+            os.makedirs(os.path.dirname(model["path"]), exist_ok=True)
+            subprocess.run(["curl", "-L", "-o", model["path"], model["url"]], check=True)
+            print(f"✓ Downloaded: {os.path.basename(model['path'])}")
+    
+    print("✅ All models ready")
+
+
 def start_comfyui_server():
     """Start ComfyUI server in background"""
     global comfyui_process
@@ -177,6 +215,9 @@ def handler(event):
 
 
 if __name__ == "__main__":
+    # Download models at runtime (first cold start will be slow)
+    download_models()
+    
     start_comfyui_server()
     if wait_for_server():
         import runpod

@@ -32,25 +32,10 @@ RUN pip install --no-cache-dir -r requirements.txt && \
 # Install Hunyuan3D wrapper requirements
 RUN pip install --no-cache-dir -r ./custom_nodes/ComfyUI-Hunyuan3DWrapper/requirements.txt
 
-# --- DOWNLOAD MODELS (EMBEDDED IN IMAGE) ---
-# Create model directories
+# Create model directories (models will be downloaded at runtime)
 RUN mkdir -p /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-dit-v2 && \
     mkdir -p /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-vae-v2 && \
     mkdir -p /app/ComfyUI/models/checkpoints
-
-# Download Hunyuan3D-2 weights (DIT and VAE)
-RUN curl -L -o /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-dit-v2/model.fp16.safetensors \
-        "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-dit-v2-0/model.fp16.safetensors" && \
-    curl -L -o /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-dit-v2/config.yaml \
-        "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-dit-v2-0/config.yaml" && \
-    curl -L -o /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-vae-v2/model.fp16.safetensors \
-        "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-vae-v2-0/model.fp16.safetensors" && \
-    curl -L -o /app/ComfyUI/models/diffusion_models/Hunyuan3D-2/hunyuan3d-vae-v2/config.yaml \
-        "https://huggingface.co/tencent/Hunyuan3D-2/resolve/main/hunyuan3d-vae-v2-0/config.yaml"
-
-# Download SDXL Base model
-RUN curl -L -o /app/ComfyUI/models/checkpoints/sd_xl_base_1.0.safetensors \
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
 
 # Install RunPod dependencies
 RUN pip install --no-cache-dir runpod requests
